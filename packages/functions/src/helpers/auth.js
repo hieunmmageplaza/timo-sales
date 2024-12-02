@@ -1,3 +1,5 @@
+import {formatDateFields} from '@avada/firestore-utils';
+
 /**
  * Get current shop id from Koa context
  * Shop ID was set from authentication step in Shopify login
@@ -17,4 +19,18 @@ export function getCurrentShop(ctx) {
  */
 export function getCurrentUser(ctx) {
   return ctx.state.user;
+}
+
+/**
+ *
+ * @param ctx
+ * @returns {any|null}
+ */
+export function getCurrentShopData(ctx) {
+  const shopData = ctx.state.user.shopData;
+  if (!shopData) {
+    return null;
+  }
+
+  return formatDateFields(ctx.state.user.shopData);
 }

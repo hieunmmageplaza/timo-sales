@@ -1,6 +1,6 @@
 export const SORT_OPTIONS = [
-  {label: 'Newest update', value: 'DATE_MODIFIED_DESC'},
-  {label: 'Oldest update', value: 'DATE_MODIFIED_ASC'}
+  {label: 'Newest update', value: 'timestamp:desc'},
+  {label: 'Oldest update', value: 'timestamp:asc'}
 ];
 
 export const DEFAULT_SETTINGS_CONFIG = {

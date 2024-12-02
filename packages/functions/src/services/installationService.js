@@ -1,14 +1,15 @@
-import {setupSettings} from '@functions/repositories/settingsRepository';
-import {syncOrders} from '@functions/repositories/shopInfoRepository';
+import {initShopSettings} from '../repositories/settingsRepository';
 import {getShopifyShop} from '../services/shopifyService';
+import {getNotifications} from '../services/notificationServices';
+import {initShopNotifications} from '../repositories/notificationsRepository';
 
 export async function installApp(ctx) {
-  console.log('================installApp================');
+  console.log('================Start_install_app================');
   try {
     const {shopify, shopData} = await getShopifyShop(ctx);
-    const {id: shopId} = shopData;
-    await Promise.all([syncOrders(shopify, shopId), setupSettings(shopId)]);
-    console.log('================End - installApp================');
+    const notifications = getNotifications(shopify, shopData.id);
+    await Promise.all([initShopSettings(shopData.id), initShopNotifications(notifications)]);
+    console.log('================End================');
   } catch (error) {
     console.log(error);
   }

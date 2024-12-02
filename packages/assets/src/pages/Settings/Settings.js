@@ -1,17 +1,23 @@
 import React, {useState} from 'react';
 import {BlockStack, Card, Layout, Page, Tabs} from '@shopify/polaris';
 import ProductItem from '@assets/components/ProductItem';
-import {DEFAULT_SETTINGS_CONFIG} from '@assets/const/Notification';
 import DisplayTabContent from '@assets/pages/Settings/TabSettings/DisplayTabContent';
 import TriggerTabContent from '@assets/pages/Settings/TabSettings/TriggerTabContent';
 import useEditApi from '@assets/hooks/api/useEditApi';
+import useFetchApi from '@assets/hooks/api/useFetchApi';
 
 /**
  * @return {JSX.Element}
  */
 export default function Settings() {
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS_CONFIG);
   const [selected, setSelected] = useState(0);
+  const {data: settings, setData: setSettings, loading} = useFetchApi({
+    url: '/settings'
+  });
+  const {handleEdit: handleSaveSettings, editing: saving} = useEditApi({
+    url: '/settings'
+  });
+
   const handleInputChange = (value, key) => {
     setSettings(prev => ({...prev, [key]: value}));
   };
@@ -31,15 +37,13 @@ export default function Settings() {
     }
   ];
 
-  const {handleEdit} = useEditApi({url: '/settings'});
-
-  const handleTest = async () => {
-    await handleEdit(settings);
+  const handleSave = async () => {
+    await handleSaveSettings(settings);
   };
   return (
     <Page
       title="Settings"
-      primaryAction={{content: 'Save', onAction: handleTest}}
+      primaryAction={{content: 'Save', onAction: handleSave, loading: loading || saving}}
       subtitle="Decide how your notifications will display"
       fullWidth
     >

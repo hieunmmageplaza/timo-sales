@@ -27,12 +27,11 @@ export const updateSettingsByShopId = async (shopId, data) => {
   }
 
   return settingsRef.doc(settings.id).update({
-    ...data,
-    updatedAt: new Date()
+    ...data
   });
 };
 
-export const setupSettings = async shopId => {
+export const initShopSettings = async shopId => {
   try {
     const doc = settingsRef.doc();
     await doc.set({...DEFAULT_SETTINGS_CONFIG, shopId, createdAt: new Date()});
@@ -40,5 +39,21 @@ export const setupSettings = async shopId => {
   } catch (error) {
     console.log(error);
     return null;
+  }
+};
+
+export const deleteShopSettingsByShopId = async shopId => {
+  try {
+    await settingsRef
+      .where('shopId', '==', shopId)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(function(doc) {
+          doc.ref.delete();
+        });
+      });
+    return {success: true};
+  } catch (e) {
+    return {success: false, error: e.message};
   }
 };

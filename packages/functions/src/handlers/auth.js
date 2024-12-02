@@ -1,14 +1,14 @@
 import App from 'koa';
 import 'isomorphic-fetch';
 import {contentSecurityPolicy, shopifyAuth} from '@avada/core';
-import shopifyConfig from '@functions/config/shopify';
 import render from 'koa-ejs';
 import path from 'path';
 import createErrorHandler from '@functions/middleware/errorHandler';
 import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
-import {installApp} from '@functions/services/installationService';
+import shopifyConfig from '@functions/config/shopify';
 import * as installationService from '../services/installationService';
+import * as uninstallationService from '../services/uninstallationService';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -45,13 +45,14 @@ app.use(
     },
     hostName: appConfig.baseUrl,
     isEmbeddedApp: true,
+    afterInstall: installationService.installApp,
+    afterUninstall: uninstallationService.uninstallApp,
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {
         success: true
       });
     }
-    // afterInstall: installationService.installApp
   }).routes()
 );
 
