@@ -1,5 +1,6 @@
 import {Firestore} from '@google-cloud/firestore';
 import moment from 'moment';
+
 const firestore = new Firestore();
 const notificationRef = firestore.collection('notifications');
 
@@ -69,3 +70,33 @@ export const deleteShopNotificationByShopId = async shopId => {
     return {success: false, error: e.message};
   }
 };
+
+export async function getNewNotification(shopify, shopId, data) {
+  try {
+    const product = await shopify.product.get(data.line_items[0].product_id);
+
+    return {
+      firstName: data.billing_address.first_name || '',
+      city: data.billing_address.city || '',
+      country: data.billing_address.country || '',
+      shopId: shopId || '',
+      timestamp: data.created_at || '',
+      productName: data.line_items[0].title || '',
+      productId: data.line_items[0].product_id || null,
+      productImage: product.image.src
+    };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function createNewNotification(data) {
+  try {
+    await notificationRef.doc().set(data);
+    return {success: true};
+  } catch (e) {
+    console.log(e);
+    return {success: false, error: e.message};
+  }
+}
