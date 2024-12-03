@@ -1,14 +1,13 @@
 import {initShopSettings} from '../repositories/settingsRepository';
-import {getShopifyShop} from '../services/shopifyService';
-import {getNotifications} from '../services/notificationServices';
+import {getShopifyShop, handleGetOrdersGraphQL} from '../services/shopifyService';
 import {initShopNotifications} from '../repositories/notificationsRepository';
-import {syncMetaFieldSetting} from '@functions/services/shopifyMetafieldService';
+import {syncMetaFieldSetting} from '../services/shopifyMetafieldService';
 
 export async function installApp(ctx) {
   console.log('================Start_install_app================');
   try {
     const {shopify, shopData} = await getShopifyShop(ctx);
-    const notifications = await getNotifications(shopify, shopData.id);
+    const notifications = await handleGetOrdersGraphQL({shopify});
     await Promise.all([
       initShopSettings(shopData.id),
       initShopNotifications(notifications),

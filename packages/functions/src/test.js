@@ -31,10 +31,7 @@ const Shopify = require('shopify-api-node');
 }
 `;
 
-  const orders = await shopify.graphql(query);
-  // const test = await shopify.order.list({
-  //   limit: 10,
-  //   status: 'any'
-  // });
+  await shopify.graphql(query);
+
   console.log('🎅🎅🎅okk');
 })();
