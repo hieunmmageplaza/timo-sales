@@ -2,7 +2,7 @@ import {
   getListNotifications,
   getNotificationsByShopId
 } from '../repositories/notificationsRepository';
-import {getShopByField} from '@functions/repositories/shopRepository';
+import {getShopByField} from '../repositories/shopRepository';
 
 export async function getNotifications(ctx) {
   try {

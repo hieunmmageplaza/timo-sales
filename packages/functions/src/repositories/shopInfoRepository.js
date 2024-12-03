@@ -1,5 +1,4 @@
 import {Firestore} from '@google-cloud/firestore';
-import {presentDataAndFormatDate} from '@avada/firestore-utils';
 
 const firestore = new Firestore();
 /** @type CollectionReference */
@@ -20,7 +19,7 @@ export async function getShopInfoByShopId(id) {
     return null;
   }
   const [doc] = docs.docs;
-  return presentDataAndFormatDate(doc);
+  return doc;
 }
 
 export async function syncOrders() {

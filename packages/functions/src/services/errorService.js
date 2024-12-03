@@ -1,4 +1,4 @@
-import {getCurrentUser} from '@functions/helpers/auth';
+import {getCurrentUser} from '../helpers/auth';
 
 /**
  * @param {*} err

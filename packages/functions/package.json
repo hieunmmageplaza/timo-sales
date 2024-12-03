@@ -12,10 +12,8 @@
     "eslint-fix": "./node_modules/.bin/eslint --fix ."
   },
   "dependencies": {
-    "@avada/core": "3.3.13",
+    "@avada/core": "1.1.12",
     "@avada/firestore-utils": "0.0.3",
-    "@avada/shopify-api-utils": "0.0.3",
-    "@avada/shopify-auth": "1.4.0",
     "@avada/utils": "^2.0.3",
     "@google-cloud/firestore": "^6.6.1",
     "@google-cloud/pubsub": "^3.7.1",

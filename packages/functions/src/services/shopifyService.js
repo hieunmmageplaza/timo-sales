@@ -1,5 +1,4 @@
 import Shopify from 'shopify-api-node';
-import {prepareShopData} from '@avada/core';
 import {getShopByField} from '../repositories/shopRepository';
 import shopifyConfig from '../config/shopify';
 export const API_VERSION = '2023-04';
