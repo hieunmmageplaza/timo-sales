@@ -29,7 +29,13 @@ export default function Settings() {
     {
       id: 'display-tabs',
       content: 'Display',
-      children: <DisplayTabContent settings={settings} handleInputChange={handleInputChange} />,
+      children: (
+        <DisplayTabContent
+          settings={settings}
+          handleInputChange={handleInputChange}
+          loading={loading}
+        />
+      ),
       panelID: 'all-customers-content-1'
     },
     {

@@ -1,8 +1,9 @@
 import React from 'react';
 import {BlockStack, Button, Checkbox, FormLayout, Grid, RangeSlider, Text} from '@shopify/polaris';
 import DesktopPosition from '@assets/components/DesktopPosition';
+import PropTypes from 'prop-types';
 
-const DisplayTabContent = ({settings, handleInputChange}) => {
+const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
   const {
     position,
     displayDuration,
@@ -48,7 +49,11 @@ const DisplayTabContent = ({settings, handleInputChange}) => {
     <FormLayout>
       <BlockStack>
         <Text as={'h2'}>APPEARANCE</Text>
-        <DesktopPosition value={position} onChange={val => handleInputChange(val, 'position')} />
+        <DesktopPosition
+          value={position}
+          onChange={val => handleInputChange(val, 'position')}
+          loading={loading}
+        />
         <Checkbox
           label="Hide time ago"
           checked={hideTimeAgo}
@@ -91,3 +96,9 @@ const DisplayTabContent = ({settings, handleInputChange}) => {
   );
 };
 export default DisplayTabContent;
+
+DisplayTabContent.propTypes = {
+  settings: PropTypes.array,
+  handleInputChange: PropTypes.func,
+  loading: PropTypes.bool
+};
