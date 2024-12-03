@@ -76,9 +76,9 @@ export async function getNewNotification(shopify, shopId, data) {
     const product = await shopify.product.get(data.line_items[0].product_id);
 
     return {
-      firstName: data.billing_address.first_name || '',
-      city: data.billing_address.city || '',
-      country: data.billing_address.country || '',
+      firstName: data.shipping_address.first_name || '',
+      city: data.shipping_address.city || '',
+      country: data.shipping_address.country || '',
       shopId: shopId || '',
       timestamp: data.created_at || '',
       productName: data.line_items[0].title || '',

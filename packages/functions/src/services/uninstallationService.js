@@ -1,7 +1,8 @@
 import * as shopRepository from '../repositories/shopRepository';
 import {deleteShopNotificationByShopId} from '../repositories/notificationsRepository';
 import {deleteShopSettingsByShopId} from '../repositories/settingsRepository';
-import {initShopify} from '../services/shopifyService';
+import {deleteMetaField} from '@functions/services/shopifyMetafieldService';
+import {initShopify} from '@functions/services/shopifyService';
 
 export async function uninstallApp(ctx) {
   console.log('================Start_uninstall_app================');
@@ -10,8 +11,9 @@ export async function uninstallApp(ctx) {
     const shop = await shopRepository.getShopByField(domain);
     const shopify = initShopify(shop);
     await Promise.all([
-      deleteShopNotificationByShopId(shop.id),
-      deleteShopSettingsByShopId(shop.id)
+      deleteShopNotificationByShopId(shop?.id),
+      deleteShopSettingsByShopId(shop?.id)
+      // deleteMetaField(shopify)
     ]);
     console.log('================End================');
   } catch (error) {

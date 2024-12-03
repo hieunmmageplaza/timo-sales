@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BlockStack, Card, Layout, Page, Tabs} from '@shopify/polaris';
+import {BlockStack, Button, Card, Layout, Page, Tabs} from '@shopify/polaris';
 import ProductItem from '@assets/components/ProductItem';
 import DisplayTabContent from '@assets/pages/Settings/TabSettings/DisplayTabContent';
 import TriggerTabContent from '@assets/pages/Settings/TabSettings/TriggerTabContent';
@@ -16,6 +16,9 @@ export default function Settings() {
   });
   const {handleEdit: handleSaveSettings, editing: saving} = useEditApi({
     url: '/settings'
+  });
+  const {handleEdit: handletest} = useEditApi({
+    url: '/test'
   });
 
   const handleInputChange = (value, key) => {
@@ -40,6 +43,7 @@ export default function Settings() {
   const handleSave = async () => {
     await handleSaveSettings(settings);
   };
+
   return (
     <Page
       title="Settings"
@@ -47,6 +51,7 @@ export default function Settings() {
       subtitle="Decide how your notifications will display"
       fullWidth
     >
+      <Button onClick={async () => await handletest([])}>TEst</Button>
       <Layout>
         <Layout.Section variant="oneThird">
           <BlockStack>

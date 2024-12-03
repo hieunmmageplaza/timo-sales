@@ -50,3 +50,7 @@ export const getDataClient = async ctx => {
     };
   }
 };
+
+export const test = async ctx => {
+  console.log('test api');
+};

@@ -6,3 +6,16 @@
     "settings": []
 }
 {% endschema %}
+
+
+{% liquid
+  assign metafield = shop.metafields['timo-sales-pop']['shopSetting'] | default: null
+%}
+{% if metafield != null %}
+  <script>
+    window.TIMO = {{ metafield }};
+    if(window.TIMO) {
+      console.log('🎅🎅🎅 add settings to TIMO');
+    }
+  </script>
+{% endif %}

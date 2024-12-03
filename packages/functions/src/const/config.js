@@ -4,7 +4,6 @@ export const DEFAULT_SETTINGS_CONFIG = {
   excludedUrls: 'https://example.com',
   firstDelay: 1,
   hideTimeAgo: false,
-  id: '',
   includedUrls: 'https://example.com',
   maxPopsDisplay: 1,
   popsInterval: 1,

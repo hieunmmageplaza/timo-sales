@@ -1,5 +1,5 @@
 import {Firestore} from '@google-cloud/firestore';
-import presentShop from '../presenters/shopPresenter';
+import {presentDataAndFormatDate} from '@avada/firestore-utils';
 
 const firestore = new Firestore();
 /** @type CollectionReference */
@@ -11,7 +11,7 @@ const collection = firestore.collection('shops');
  */
 export async function getShopById(id) {
   const doc = await collection.doc(id).get();
-  return doc;
+  return presentDataAndFormatDate(doc);
 }
 
 export async function getShopByField(value, field = 'shopifyDomain') {

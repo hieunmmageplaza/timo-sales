@@ -1,9 +1,11 @@
 import {getCurrentShop} from '../helpers/auth';
 import {getSettingsByShopId, updateSettingsByShopId} from '../repositories/settingsRepository';
+import {syncMetaFieldSetting} from '@functions/services/shopifyMetafieldService';
+import {getShopById} from '@functions/repositories/shopRepository';
 
 export async function getSettings(ctx) {
   try {
-    const {shopID} = getCurrentShop(ctx);
+    const shopID = getCurrentShop(ctx);
     const settings = await getSettingsByShopId(shopID);
 
     ctx.body = {
@@ -20,10 +22,11 @@ export async function getSettings(ctx) {
 }
 export async function updatedSettings(ctx) {
   try {
-    const {shopID} = getCurrentShop(ctx);
-    const body = ctx.req.body;
-
-    const settings = await updateSettingsByShopId(shopID, body);
+    const shopID = getCurrentShop(ctx);
+    const {data} = ctx.req.body;
+    const shopData = await getShopById(shopID);
+    const settings = await updateSettingsByShopId(shopID, data);
+    await syncMetaFieldSetting({shopData, data});
 
     ctx.body = {
       success: true,

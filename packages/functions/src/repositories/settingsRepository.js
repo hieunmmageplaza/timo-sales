@@ -1,5 +1,6 @@
 import {Firestore} from '@google-cloud/firestore';
 import {DEFAULT_SETTINGS_CONFIG} from '../const/config';
+import {presentDataAndFormatDate} from '@avada/firestore-utils';
 
 const firestore = new Firestore();
 const settingsRef = firestore.collection('settings');
@@ -15,19 +16,13 @@ export const getSettingsByShopId = async shopId => {
   }
 
   const [doc] = docs.docs;
-
-  return doc;
+  return presentDataAndFormatDate(doc);
 };
 
 export const updateSettingsByShopId = async (shopId, data) => {
-  const settings = await getSettingsByShopId(shopId);
-
-  if (!settings) {
-    return settingsRef.add(data);
-  }
-
-  return settingsRef.doc(settings.id).update({
-    ...data
+  const {id: docId, ...postData} = data;
+  return settingsRef.doc(docId).update({
+    ...postData
   });
 };
 

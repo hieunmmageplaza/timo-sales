@@ -1,10 +1,9 @@
-(async () => {
-  const BASE_URL = 'test';
-
+(() => {
+  console.log('🎅🎅🎅test test');
+  const BASE_URL = 'https://localhost:3000/scripttag/index.min.js';
   const scriptElement = document.createElement('script');
-  scriptElement.type = 'text/javascript';
-  scriptElement.async = true;
-  scriptElement.src = `${BASE_URL}/index.min.js?v=${new Date().getTime()}`;
-  const firstScript = document.getElementsByTagName('script')[0];
-  firstScript.parentNode.insertBefore(scriptElement, firstScript);
+  scriptElement.async = !0;
+  scriptElement.src = BASE_URL;
+  const firstScriptElement = document.getElementsByTagName('script')[0];
+  firstScriptElement.parentNode.insertBefore(scriptElement, firstScriptElement);
 })();
