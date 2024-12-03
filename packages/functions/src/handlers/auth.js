@@ -9,7 +9,6 @@ import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
 import * as installationService from '../services/installationService';
 import * as unInstallationService from '../services/uninstallationService';
-import {uninstallApp} from '../services/uninstallationService';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
