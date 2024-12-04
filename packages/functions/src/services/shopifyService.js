@@ -47,20 +47,11 @@ export async function handleGetOrdersGraphQL({shopify}) {
   }`;
 
   try {
-    const result = await shopify.graphql(query);
-    return result.data.orders.edges.map(edge => {
-      const order = edge.node;
-      const imageUrl = order.lineItems.nodes[0]?.image?.url || null;
-
-      return {
-        orderId: order.id,
-        createdAt: order.createdAt,
-        firstName: order.shippingAddress.firstName,
-        lastName: order.shippingAddress.lastName,
-        city: order.shippingAddress.city,
-        country: order.shippingAddress.country,
-        imageUrl: imageUrl
-      };
+    const {orders} = await shopify.graphql(query);
+    return orders.edges.map(({node: {id, createdAt, shippingAddress, lineItems}}) => {
+      const imageUrl = lineItems.nodes?.[0]?.image?.url || null;
+      const {firstName, lastName, city, country} = shippingAddress;
+      return {orderId: id, createdAt, firstName, lastName, city, country, productImage: imageUrl};
     });
   } catch (error) {
     console.error('Error fetching orders:', error);
@@ -68,36 +59,28 @@ export async function handleGetOrdersGraphQL({shopify}) {
   }
 }
 
-export async function handleGetProductsGraphQL({
-  shopify,
-  ids = ['gid://shopify/Product/8123494138031', 'gid://shopify/Product/8123494138031']
-}) {
-  const graphqlQuery = `
-    query ($ids: [ID!]!) {
-      nodes(ids: $ids) {
-        ... on Product {
-          id
-          featuredMedia {
-            preview {
-              image {
-                url
-              }
-            }
-          }
+export async function handleGetProductGraphQL({shopify, productId = '8123494138031'}) {
+  const graphqlQuery = `query ($id: ID!) {
+  product(id: $id) {
+    id
+    featuredMedia {
+      preview {
+        image {
+          url
         }
       }
     }
-  `;
-  const variables = {ids};
+  }
+}
+`;
   try {
-    const result = await shopify.graphql(graphqlQuery, variables);
-
-    return result.data.nodes.map(item => {
-      return {
-        productId: item.id,
-        imageUrl: item.featuredMedia?.preview?.image?.url || null
-      };
+    const {product = {}} = await shopify.graphql(graphqlQuery, {
+      id: `gid://shopify/Product/${productId}`
     });
+    return {
+      productId: product?.id,
+      imageUrl: product?.featuredMedia?.preview?.image?.url || null
+    };
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];

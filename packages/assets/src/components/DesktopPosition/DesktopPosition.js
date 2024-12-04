@@ -16,14 +16,9 @@ export default function DesktopPosition({
     <BlockStack>
       <p>Desktop position</p>
       <InlineStack gap="400">
-        {options.map((option, index) => {
-          return <Skela key={index} width={'150px'} height={'80px'} />;
-        })}
-      </InlineStack>
-      <InlineStack gap="400">
         {options.map((option, index) =>
           loading ? (
-            <Skela key={index} width="150px" height="80px" />
+            <Skela key={index} width="150px" height="80px" borderRadius={'1rem'} />
           ) : (
             <div
               key={index}

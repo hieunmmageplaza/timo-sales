@@ -36,5 +36,5 @@ import NotificationPopup from '@avada/assets/src/components/NotificationPopup/No
     }
   }
 
-  // await showPopupsSequentially(notifications);
+  await showPopupsSequentially(notifications);
 })();

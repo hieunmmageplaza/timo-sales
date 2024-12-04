@@ -59,6 +59,7 @@ const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
           checked={hideTimeAgo}
           id={'hideTimeAgo'}
           onChange={handleInputChange}
+          disabled={loading}
         />
         <Checkbox
           label="Truncate content text"
@@ -66,6 +67,7 @@ const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
           helpText="If you product name is long for one line, it will be truncated to 'Product na..'"
           checked={truncateProductName}
           onChange={handleInputChange}
+          disabled={loading}
         />
         <Text as={'h2'}>TIMING</Text>
         <Grid
@@ -88,6 +90,7 @@ const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
               value={item.value}
               onChange={handleInputChange}
               suffix={<Button disabled>{item.value} second(s)</Button>}
+              disabled={loading}
             />
           ))}
         </Grid>

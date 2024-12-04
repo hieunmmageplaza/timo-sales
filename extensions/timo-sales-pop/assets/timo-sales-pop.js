@@ -1,5 +1,4 @@
 (() => {
-  console.log('🎅🎅🎅test test');
   const BASE_URL = 'https://localhost:3000/scripttag/index.min.js';
   const scriptElement = document.createElement('script');
   scriptElement.async = !0;

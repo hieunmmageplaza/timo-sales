@@ -6,32 +6,6 @@ const Shopify = require('shopify-api-node');
     shopName: 'hieutimonew.myshopify.com',
     apiVersion: '2024-10'
   });
-  const query = `query {
-  orders(first: 10) {
-    edges {
-      node {
-        id
-        createdAt
-        shippingAddress {
-          firstName
-          lastName
-          city
-          country
-        }
-        lineItems(first: 1) {
-          nodes {
-            product {
-              id
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`;
-
-  await shopify.graphql(query);
 
   console.log('🎅🎅🎅okk');
 })();

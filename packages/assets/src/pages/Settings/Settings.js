@@ -68,7 +68,7 @@ export default function Settings() {
         </Layout.Section>
         <Layout.Section>
           <Card>
-            <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
+            <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange} disabled={loading}>
               <Card>{tabs[selected].children}</Card>
             </Tabs>
           </Card>

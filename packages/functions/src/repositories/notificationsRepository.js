@@ -13,7 +13,7 @@ export const getNotificationsByShopId = async shopId => {
 
     return docs.docs.map(doc => ({
       id: doc.id,
-      timeAgo: moment(doc.data().timestamp).fromNow(),
+      timeAgo: moment(doc.data().createdAt).fromNow(),
       ...doc.data()
     }));
   } catch (error) {
@@ -24,14 +24,14 @@ export const getNotificationsByShopId = async shopId => {
 
 export const getListNotifications = async () => {
   try {
-    const docs = await notificationRef.get();
+    const docs = await notificationRef.orderBy('createdAt', 'desc').get();
     if (docs.empty) {
       return null;
     }
 
     return docs.docs.map(doc => ({
       id: doc.id,
-      timeAgo: moment(doc.data().timestamp).fromNow(),
+      timeAgo: moment(doc.data().createdAt).fromNow(),
       ...doc.data()
     }));
   } catch (error) {
@@ -70,26 +70,6 @@ export const deleteShopNotificationByShopId = async shopId => {
     return {success: false, error: e.message};
   }
 };
-
-export async function getNewNotification(shopify, shopId, data) {
-  try {
-    const product = await shopify.product.get(data.line_items[0].product_id);
-
-    return {
-      firstName: data.shipping_address.first_name || '',
-      city: data.shipping_address.city || '',
-      country: data.shipping_address.country || '',
-      shopId: shopId || '',
-      timestamp: data.created_at || '',
-      productName: data.line_items[0].title || '',
-      productId: data.line_items[0].product_id || null,
-      productImage: product.image.src
-    };
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
 
 export async function createNewNotification(data) {
   try {
