@@ -1,5 +1,5 @@
 import React from 'preact/compat';
-import {render} from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import NotificationPopup from '../../assets/src/components/NotificationPopup/NotificationPopup';
 
 (async () => {
@@ -51,10 +51,8 @@ import NotificationPopup from '../../assets/src/components/NotificationPopup/Not
       container.id = 'timo-sales-pop';
 
       document.body.appendChild(container);
-      render(
-        <NotificationPopup setting={setting} notificationData={notifications[i]} />,
-        document.getElementById('timo-sales-pop')
-      );
+      const root = createRoot(container);
+      root.render(<NotificationPopup setting={setting} notificationData={notifications[i]} />);
       console.log('==>render done');
       await delay(displayDuration);
       document.body.removeChild(container);

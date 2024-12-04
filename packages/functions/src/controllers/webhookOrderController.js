@@ -1,5 +1,6 @@
 import {getShopByField} from '../repositories/shopRepository';
-import {handleGetProductGraphQL, initShopify} from '../services/shopifyService';
+import {initShopify} from '../services/shopifyService';
+import {handleGetProductGraphQL} from '../services/shopifyGraphQL';
 import {createNewNotification} from '../repositories/notificationsRepository';
 
 export async function createNotification(ctx) {

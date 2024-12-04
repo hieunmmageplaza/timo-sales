@@ -38,12 +38,8 @@ const NotificationPopup = ({setting = {}, notificationData = {}}) => {
 };
 
 NotificationPopup.propTypes = {
-  firstName: PropTypes.string,
-  city: PropTypes.string,
-  country: PropTypes.string,
-  productName: PropTypes.string,
-  timestamp: PropTypes.string,
-  productImage: PropTypes.string
+  setting: PropTypes.object,
+  notificationData: PropTypes.object
 };
 
 export default NotificationPopup;

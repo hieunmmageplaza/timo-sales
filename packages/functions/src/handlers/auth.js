@@ -9,6 +9,7 @@ import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
 import * as installationService from '../services/installationService';
 import * as unInstallationService from '../services/uninstallationService';
+import {afterLogin} from '../services/shopifyService';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -47,6 +48,7 @@ app.use(
     isEmbeddedApp: true,
     afterInstall: installationService.installApp,
     afterUninstall: unInstallationService.uninstallApp,
+    afterLogin: afterLogin,
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {

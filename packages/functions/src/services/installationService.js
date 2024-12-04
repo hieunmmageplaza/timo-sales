@@ -1,5 +1,5 @@
 import {initShopSettings} from '../repositories/settingsRepository';
-import {getShopifyShop, handleGetOrdersGraphQL} from '../services/shopifyService';
+import {getShopifyShop, handleGetOrdersGraphQL} from '../services/shopifyGraphQL';
 import {initShopNotifications} from '../repositories/notificationsRepository';
 import {syncMetaFieldSetting} from '../services/shopifyMetafieldService';
 

@@ -1,5 +1,6 @@
 import Shopify from 'shopify-api-node';
 import {getShopByField} from '../repositories/shopRepository';
+import appConfig from '@functions/config/app';
 
 export const API_VERSION = '2023-04';
 
@@ -21,68 +22,35 @@ export function initShopify(shopData, apiVersion = API_VERSION) {
   });
 }
 
-export async function handleGetOrdersGraphQL({shopify}) {
-  const query = `{
-    orders(first: 5) {
-      edges {
-        node {
-          id
-          createdAt
-          shippingAddress {
-            firstName
-            lastName
-            city
-            country
-          }
-          lineItems(first: 1) {
-            nodes {
-              image {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }`;
-
-  try {
-    const {orders} = await shopify.graphql(query);
-    return orders.edges.map(({node: {id, createdAt, shippingAddress, lineItems}}) => {
-      const imageUrl = lineItems.nodes?.[0]?.image?.url || null;
-      const {firstName, lastName, city, country} = shippingAddress;
-      return {orderId: id, createdAt, firstName, lastName, city, country, productImage: imageUrl};
-    });
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    return [];
+export async function afterLogin(ctx) {
+  const shopifyDomain = ctx.state.shopify.shop;
+  const shopData = await getShopByField(shopifyDomain);
+  if (appConfig.baseUrl.includes('trycloudflare')) {
+    const shopify = initShopify(shopData);
+    await registerWebhook(shopify);
   }
 }
 
-export async function handleGetProductGraphQL({shopify, productId = '8123494138031'}) {
-  const graphqlQuery = `query ($id: ID!) {
-  product(id: $id) {
-    id
-    featuredMedia {
-      preview {
-        image {
-          url
-        }
-      }
-    }
-  }
-}
-`;
+async function registerWebhook(shopify) {
   try {
-    const {product = {}} = await shopify.graphql(graphqlQuery, {
-      id: `gid://shopify/Product/${productId}`
-    });
-    return {
-      productId: product?.id,
-      imageUrl: product?.featuredMedia?.preview?.image?.url || null
-    };
+    const webhookAddress = `https://${appConfig.baseUrl}/webhook/newOrder`;
+    const currentWebhooks = await shopify.webhook.list();
+    const unusedWebhooks = currentWebhooks.filter(
+      webhook => !webhook.address.includes(appConfig.baseUrl)
+    );
+    if (unusedWebhooks.length) {
+      await Promise.all(unusedWebhooks.map(webhook => shopify.webhook.delete(webhook.id)));
+    }
+    const existingWebhook = currentWebhooks.find(webhook => webhook.address === webhookAddress);
+    if (!existingWebhook) {
+      return await shopify.webhook.create({
+        address: webhookAddress,
+        topic: 'orders/create',
+        format: 'json'
+      });
+    }
   } catch (error) {
-    console.error('Error fetching products:', error);
-    return [];
+    console.error('Error registering webhook:', error);
+    throw error;
   }
 }
