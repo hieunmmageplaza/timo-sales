@@ -42,7 +42,8 @@ const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
       description:
         'The maximum number of popups are allowed to show after page loading. Maxium number is 80.',
       keyValue: 'maxPopsDisplay',
-      value: maxPopsDisplay
+      value: maxPopsDisplay,
+      textField: 'posts'
     }
   ];
   return (
@@ -87,9 +88,14 @@ const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
               helpText={item.description}
               label={item.label}
               max={20}
+              min={1}
               value={item.value}
               onChange={handleInputChange}
-              suffix={<Button disabled>{item.value} second(s)</Button>}
+              suffix={
+                <Button disabled>
+                  {item.value} {item.textField ? item.textField : 'second(s)'}
+                </Button>
+              }
               disabled={loading}
             />
           ))}

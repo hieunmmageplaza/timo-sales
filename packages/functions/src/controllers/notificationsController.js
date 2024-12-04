@@ -27,10 +27,11 @@ export async function getNotifications(ctx) {
 export const getDataClient = async ctx => {
   try {
     const {shopifyDomain} = ctx.request.query;
+    console.log('🎅🎅🎅getDataClient', shopifyDomain);
+    return;
     const shopData = await getShopByField(shopifyDomain);
-    const shopId = shopData.id;
 
-    const notifications = await getNotificationsByShopId(shopId);
+    const notifications = await getNotificationsByShopId(shopData.id);
     if (!notifications) {
       console.log('No notifications found');
     }

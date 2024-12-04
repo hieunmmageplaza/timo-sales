@@ -2,16 +2,13 @@ import React from 'react';
 import './NoticationPopup.scss';
 import PropTypes from 'prop-types';
 
-const NotificationPopup = ({
-  firstName = 'John Doe',
-  city = 'New York',
-  country = 'United States',
-  productName = 'Puffer Jacket With Hidden Hood',
-  timestamp = 'a day ago',
-  productImage = 'https://hieutimonew.myshopify.com/cdn/shop/files/snowboard_sky.png?v=1733042402&width=990'
-}) => {
+const NotificationPopup = ({setting = {}, notificationData = {}}) => {
+  const {firstName, city, country, productName, timestamp, productImage} = notificationData;
+  const {position, hideTimeAgo} = setting;
+  console.log('🎅🎅🎅render');
+
   return (
-    <div className="Avava-SP__Wrapper fadeInUp animated">
+    <div className={`Avava-SP__Wrapper fadeInUp animated ${position}`}>
       <div className="Avava-SP__Inner">
         <div className="Avava-SP__Container">
           <a href="#" className={'Avava-SP__LinkWrapper'}>
@@ -27,7 +24,7 @@ const NotificationPopup = ({
               </div>
               <div className={'Avada-SP__Subtitle'}>purchased {productName}</div>
               <div className={'Avada-SP__Footer'}>
-                {timestamp}{' '}
+                {!hideTimeAgo && timestamp}
                 <span className="uni-blue">
                   <i className="fa fa-check" aria-hidden="true" /> by Avada
                 </span>

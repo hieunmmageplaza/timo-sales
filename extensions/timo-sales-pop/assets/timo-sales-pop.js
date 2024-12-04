@@ -1,5 +1,5 @@
 (() => {
-  const BASE_URL = 'https://localhost:3000/scripttag/index.min.js';
+  const BASE_URL = 'http://localhost:5050/scripttag/index.min.js';
   const scriptElement = document.createElement('script');
   scriptElement.async = !0;
   scriptElement.src = BASE_URL;
