@@ -1,8 +1,8 @@
 import {isEmpty} from '@avada/utils';
-import {DEFAULT_SETTINGS_CONFIG} from '../const/config';
-import {initShopify} from '../services/shopifyService';
+import {DEFAULT_SETTINGS_CONFIG} from '@functions/const/config';
+import {initShopify} from '@functions/services/shopify/shopifyService';
 
-export const META_FIELD_NAMESPACE = 'timo-sales-pop';
+export const META_FIELD_NAMESPACE = 'avada-sales-pop';
 export const META_FIELD_KEY = 'shopSetting';
 
 export async function syncMetaFieldSetting({

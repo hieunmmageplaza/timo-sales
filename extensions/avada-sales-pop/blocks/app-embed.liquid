@@ -2,14 +2,14 @@
 {
     "name": "Simple Sales Pop",
     "target": "body",
-    "javascript": "timo-sales-pop.js",
+    "javascript": "avada-sales-pop.js",
     "settings": []
 }
 {% endschema %}
 
 
 {% liquid
-  assign metafield = shop.metafields['timo-sales-pop']['shopSetting'] | default: null
+  assign metafield = shop.metafields['avada-sales-pop']['shopSetting'] | default: null
 %}
 {% if metafield != null %}
   <script>

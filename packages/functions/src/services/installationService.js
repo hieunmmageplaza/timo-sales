@@ -1,8 +1,8 @@
-import {initShopSettings} from '../repositories/settingsRepository';
-import {handleGetOrdersGraphQL} from '../services/shopifyGraphQL';
-import {getShopifyShop, initShopify} from '../services/shopifyService';
-import {initShopNotifications} from '../repositories/notificationsRepository';
-import {syncMetaFieldSetting} from '../services/shopifyMetafieldService';
+import {initShopSettings} from '@functions/repositories/settingsRepository';
+import {handleGetOrdersGraphQL} from '@functions/services/shopify/graphqlService';
+import {getShopifyShop, initShopify} from '@functions/services/shopify/shopifyService';
+import {initShopNotifications} from '@functions/repositories/notificationsRepository';
+import {syncMetaFieldSetting} from '@functions/services/shopify/shopifyMetaFieldService';
 import {getCurrentUser} from '@functions/helpers/auth';
 import {getShopByField} from '@functions/repositories/shopRepository';
 import appConfig from '@functions/config/app';

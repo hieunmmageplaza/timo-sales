@@ -1,6 +1,6 @@
 import {getCurrentShop} from '../helpers/auth';
 import {getSettingsByShopId, updateSettingsByShopId} from '../repositories/settingsRepository';
-import {syncMetaFieldSetting} from '@functions/services/shopifyMetafieldService';
+import {syncMetaFieldSetting} from '@functions/services/shopify/shopifyMetaFieldService';
 import {getShopById} from '@functions/repositories/shopRepository';
 
 export async function getSettings(ctx) {

@@ -44,7 +44,7 @@ import makeRequest from './helper/api/makeRequest';
       await delay(i === 0 ? firstDelay : popsInterval);
 
       const container = document.createElement('div');
-      container.id = 'timo-sales-pop';
+      container.id = 'avada-sales-pop';
 
       document.body.appendChild(container);
       const root = createRoot(container);

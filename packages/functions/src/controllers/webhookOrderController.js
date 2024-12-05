@@ -1,7 +1,7 @@
-import {getShopByField} from '../repositories/shopRepository';
-import {initShopify} from '../services/shopifyService';
-import {handleGetProductGraphQL} from '../services/shopifyGraphQL';
-import {createNewNotification} from '../repositories/notificationsRepository';
+import {getShopByField} from '@functions/repositories/shopRepository';
+import {initShopify} from '@functions/services/shopify/shopifyService';
+import {handleGetProductGraphQL} from '@functions/services/shopify/graphqlService';
+import {createNewNotification} from '@functions/repositories/notificationsRepository';
 
 export async function createNotification(ctx) {
   const domain = await ctx.get('X-Shopify-Shop-Domain');
