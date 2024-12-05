@@ -4,10 +4,9 @@ import ProductItem from '@assets/components/ProductItem';
 import useFetchApi from '@assets/hooks/api/useFetchApi';
 
 /**
- * Render a home page for overview
+ * Render a notifications page for overview
  *
  * @return {React.ReactElement}
- * @constructor
  */
 export default function Notifications() {
   const {data = [], loading} = useFetchApi({

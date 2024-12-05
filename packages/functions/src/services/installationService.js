@@ -7,6 +7,10 @@ import {getCurrentUser} from '@functions/helpers/auth';
 import {getShopByField} from '@functions/repositories/shopRepository';
 import appConfig from '@functions/config/app';
 
+/**
+ * @param ctx
+ * @returns {Promise<void>}
+ */
 export async function installApp(ctx) {
   console.log('================Start_install_app================');
   try {

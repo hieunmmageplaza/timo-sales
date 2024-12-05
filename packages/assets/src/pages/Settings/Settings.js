@@ -8,7 +8,9 @@ import NotificationPopup from '@assets/components/NotificationPopup/Notification
 import {ShoppingSettingsContext} from '@assets/Context/ShopSettingConext';
 
 /**
- * @return {JSX.Element}
+ * Render a settings page
+ *
+ * @return {React.ReactElement}
  */
 export default function Settings() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);

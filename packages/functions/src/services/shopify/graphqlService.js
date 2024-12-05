@@ -1,3 +1,7 @@
+/**
+ * @param shopify
+ * @returns {Promise<Object[]>}
+ */
 export async function handleGetOrdersGraphQL({shopify}) {
   const query = `{
     orders(first: 30) {
@@ -36,7 +40,12 @@ export async function handleGetOrdersGraphQL({shopify}) {
   }
 }
 
-export async function handleGetProductGraphQL({shopify, productId = '8123494138031'}) {
+/**
+ * @param shopify
+ * @param productId
+ * @returns {Promise<Object>}
+ */
+export async function handleGetProductGraphQL({shopify, productId}) {
   const graphqlQuery = `query ($id: ID!) {
   product(id: $id) {
     id

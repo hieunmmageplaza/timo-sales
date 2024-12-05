@@ -1,12 +1,15 @@
-import {
-  getListNotifications,
-  getNotificationsByShopId
-} from '../repositories/notificationsRepository';
+import {getNotificationsByShopId} from '../repositories/notificationsRepository';
 import {getShopByField} from '../repositories/shopRepository';
+import {getCurrentShop} from '@functions/helpers/auth';
 
+/**
+ * @param ctx
+ * @returns {Promise<{notifications: *}>}
+ */
 export async function getNotifications(ctx) {
   try {
-    const notifications = await getListNotifications();
+    const shopID = getCurrentShop(ctx);
+    const notifications = await getNotificationsByShopId(shopID);
     if (!notifications) {
       console.log('No notifications found');
     }
@@ -24,22 +27,25 @@ export async function getNotifications(ctx) {
   }
 }
 
+/**
+ * @param ctx
+ * @returns {Promise<{notification: *}>}
+ */
 export const getDataClient = async ctx => {
   try {
     console.log('🎅🎅🎅test getDataClient ');
     const {shopifyDomain} = ctx.request.query;
     const shopData = await getShopByField(shopifyDomain);
 
-    const notifications = await getNotificationsByShopId(shopData.id);
-    if (!notifications) {
+    const notification = await getNotificationsByShopId(shopData.id);
+    if (!notification) {
       console.log('No notifications found');
     }
 
     ctx.body = {
       success: true,
       data: {
-        notifications,
-        setting: []
+        notification
       }
     };
   } catch (error) {

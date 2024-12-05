@@ -5,6 +5,12 @@ import {presentDataAndFormatDate} from '@avada/firestore-utils';
 const firestore = new Firestore();
 const settingsRef = firestore.collection('settings');
 
+/**
+ * Get settings of shop by given shop ID.
+ *
+ * @param {string} shopId
+ * @return {Promise<FirebaseFirestore.DocumentData>}
+ */
 export const getSettingsByShopId = async shopId => {
   const docs = await settingsRef
     .where('shopId', '==', shopId)
@@ -19,6 +25,13 @@ export const getSettingsByShopId = async shopId => {
   return presentDataAndFormatDate(doc);
 };
 
+/**
+ * Updates the settings for a given shop by its document ID
+ *
+ * @param {string} shopId
+ * @param {object} data
+ * @return {Promise<FirebaseFirestore.DocumentData>}
+ */
 export const updateSettingsByShopId = async (shopId, data) => {
   const {id: docId, ...postData} = data;
   return settingsRef.doc(docId).update({
@@ -26,29 +39,29 @@ export const updateSettingsByShopId = async (shopId, data) => {
   });
 };
 
+/**
+ * Initializes and saves settings of shop by given shop ID.
+ *
+ * @param {string} shopId
+ * @returns {Promise<DocumentReference>}
+ */
 export const initShopSettings = async shopId => {
-  try {
-    const doc = settingsRef.doc();
-    await doc.set({...DEFAULT_SETTINGS_CONFIG, shopId, createdAt: new Date()});
-    return true;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+  await settingsRef.doc().set({...DEFAULT_SETTINGS_CONFIG, shopId, createdAt: new Date()});
 };
 
+/**
+ * Deletes all settings by given shop ID when uninstall app.
+ *
+ * @param {string} shopId
+ * @return {Promise<>}
+ */
 export const deleteShopSettingsByShopId = async shopId => {
-  try {
-    await settingsRef
-      .where('shopId', '==', shopId)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(function(doc) {
-          doc.ref.delete();
-        });
+  return await settingsRef
+    .where('shopId', '==', shopId)
+    .get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(function(doc) {
+        doc.ref.delete();
       });
-    return {success: true};
-  } catch (e) {
-    return {success: false, error: e.message};
-  }
+    });
 };

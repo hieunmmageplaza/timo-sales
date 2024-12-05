@@ -5,6 +5,14 @@ import {initShopify} from '@functions/services/shopify/shopifyService';
 export const META_FIELD_NAMESPACE = 'avada-sales-pop';
 export const META_FIELD_KEY = 'shopSetting';
 
+/**
+ *
+ * @param shopData
+ * @param data
+ * @param namespace
+ * @param key
+ * @returns {Promise<void>}
+ */
 export async function syncMetaFieldSetting({
   shopData,
   data = DEFAULT_SETTINGS_CONFIG,

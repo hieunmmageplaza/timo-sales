@@ -2,6 +2,10 @@ import * as shopRepository from '../repositories/shopRepository';
 import {deleteShopNotificationByShopId} from '../repositories/notificationsRepository';
 import {deleteShopSettingsByShopId} from '../repositories/settingsRepository';
 
+/**
+ * @param ctx
+ * @returns {Promise<void>}
+ */
 export async function uninstallApp(ctx) {
   console.log('================Start_uninstall_app================');
   try {
