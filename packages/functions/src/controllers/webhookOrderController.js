@@ -7,7 +7,6 @@ export async function createNotification(ctx) {
   const domain = await ctx.get('X-Shopify-Shop-Domain');
   const orderData = ctx.req.body;
   console.log('🎅🎅🎅 createNotification', orderData);
-  return;
   const shopData = await getShopByField(domain);
   const shopify = initShopify(shopData);
   const productId = orderData.line_items[0].product_id;

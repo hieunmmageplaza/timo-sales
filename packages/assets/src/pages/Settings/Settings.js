@@ -19,7 +19,8 @@ export default function Settings() {
     url: '/settings'
   });
   const {handleEdit: handletest} = useEditApi({
-    url: '/test'
+    url: '/test',
+    useToast: false
   });
 
   const handleInputChange = (value, key) => {
@@ -58,7 +59,7 @@ export default function Settings() {
       subtitle="Decide how your notifications will display"
       fullWidth
     >
-      <Button onClick={async () => await handletest([])}>TEst</Button>
+      <Button onClick={async () => await handletest([])}>TEst api</Button>
       <Layout>
         <Layout.Section variant="oneThird">
           <Card>

@@ -28,7 +28,6 @@ export const getDataClient = async ctx => {
   try {
     console.log('🎅🎅🎅test getDataClient ');
     const {shopifyDomain} = ctx.request.query;
-    return (ctx.body = {message: 'ok ok ok'});
     const shopData = await getShopByField(shopifyDomain);
 
     const notifications = await getNotificationsByShopId(shopData.id);

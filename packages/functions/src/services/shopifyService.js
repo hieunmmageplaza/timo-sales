@@ -5,7 +5,7 @@ import appConfig from '@functions/config/app';
 export const API_VERSION = '2023-04';
 
 export async function getShopifyShop(ctx) {
-  const shopDomain = 'hieutimonew.myshopify.com';
+  const shopDomain = ctx.state.shopify.shop;
   const shopData = await getShopByField(shopDomain);
   const shopify = initShopify(shopData);
 
