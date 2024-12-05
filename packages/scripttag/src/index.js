@@ -1,6 +1,6 @@
 import React from 'preact/compat';
 import {createRoot} from 'react-dom/client';
-import NotificationPopup from './components/NotificationPopup/NotificationPopup';
+import NotificationPopup from '../../assets/src/components/NotificationPopup/NotificationPopup';
 import makeRequest from './helper/api/makeRequest';
 
 (async () => {
@@ -44,7 +44,7 @@ import makeRequest from './helper/api/makeRequest';
       await delay(i === 0 ? firstDelay : popsInterval);
 
       const container = document.createElement('div');
-      container.id = 'timo-sales-pop';
+      // container.id = 'timo-sales-pop';
 
       document.body.appendChild(container);
       const root = createRoot(container);

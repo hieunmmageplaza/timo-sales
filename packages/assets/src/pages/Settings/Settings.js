@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {BlockStack, Button, Card, Layout, Page, Tabs} from '@shopify/polaris';
+import {BlockStack, Box, Button, Card, InlineStack, Layout, Page, Tabs} from '@shopify/polaris';
 import ProductItem from '@assets/components/ProductItem';
 import DisplayTabContent from '@assets/pages/Settings/TabSettings/DisplayTabContent';
 import TriggerTabContent from '@assets/pages/Settings/TabSettings/TriggerTabContent';
 import useEditApi from '@assets/hooks/api/useEditApi';
 import useFetchApi from '@assets/hooks/api/useFetchApi';
+import NotificationPopup from '@assets/components/NotificationPopup/NotificationPopup';
 
 /**
  * @return {JSX.Element}
@@ -60,11 +61,11 @@ export default function Settings() {
       <Button onClick={async () => await handletest([])}>TEst</Button>
       <Layout>
         <Layout.Section variant="oneThird">
-          <BlockStack>
-            <Card>
-              <ProductItem />
-            </Card>
-          </BlockStack>
+          <Card>
+            <InlineStack blockAlign={'center'} align={'center'}>
+              <NotificationPopup />
+            </InlineStack>
+          </Card>
         </Layout.Section>
         <Layout.Section>
           <Card>

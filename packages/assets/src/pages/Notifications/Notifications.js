@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Card, Page, ResourceList} from '@shopify/polaris';
 import ProductItem from '@assets/components/ProductItem';
-import {SORT_OPTIONS} from '@assets/const/Notification';
 import useFetchApi from '@assets/hooks/api/useFetchApi';
 
 /**
@@ -11,7 +10,6 @@ import useFetchApi from '@assets/hooks/api/useFetchApi';
  * @constructor
  */
 export default function Notifications() {
-  const [sortValue, setSortValue] = useState('timestamp:desc');
   const {data = [], loading} = useFetchApi({
     url: '/notifications'
   });
@@ -25,15 +23,10 @@ export default function Notifications() {
             plural: 'notifications',
             singular: 'notification'
           }}
-          sortValue={sortValue}
           renderItem={renderResourceItem}
-          sortOptions={SORT_OPTIONS}
-          onSortChange={selected => {
-            setSortValue(selected);
-          }}
         />
       </Card>
     </Page>
   );
 }
-const renderResourceItem = items => <ProductItem {...items} />;
+const renderResourceItem = item => <ProductItem {...item} />;

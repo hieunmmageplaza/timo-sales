@@ -8,15 +8,19 @@ const ProductItem = ({
   id = 1,
   country = 'Viet Nam',
   productImage = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg',
-  timestamp = '2024-05-27T23:08:33-04:00',
+  createdAt = '2024-05-27T23:08:33-04:00',
   productName = 'Sport Shoes',
-  timeAgo = '1 hour ago'
+  timeAgo = '1 hour ago',
+  firstName = 'Abcs',
+  lastName = 'Nguyen'
 }) => {
   return (
     <ResourceItem id={id.toString()} media={<Thumbnail source={productImage} alt="" />}>
       <InlineStack align="space-between" blockAlign="start">
         <BlockStack>
-          <Text as={'p'}>Someone in {country}</Text>
+          <Text as={'p'}>
+            {`${firstName} ${lastName}`} in {country}
+          </Text>
           <Text as="strong" variant="headingSm">
             Purchased {productName}
           </Text>
@@ -29,7 +33,7 @@ const ProductItem = ({
           </InlineStack>
         </BlockStack>
         <Text as={'p'} tone="base">
-          From: {formatDate(timestamp)}
+          From: {formatDate(createdAt)}
         </Text>
       </InlineStack>
     </ResourceItem>
@@ -40,9 +44,11 @@ ProductItem.propTypes = {
   id: PropTypes.number,
   country: PropTypes.string,
   productImage: PropTypes.string,
-  timestamp: PropTypes.string,
+  createdAt: PropTypes.string,
   productName: PropTypes.string,
-  timeAgo: PropTypes.string
+  timeAgo: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string
 };
 ProductItem.displayName = 'ProductItem';
 
