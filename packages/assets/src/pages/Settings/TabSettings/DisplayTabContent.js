@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {BlockStack, Button, Checkbox, FormLayout, Grid, RangeSlider, Text} from '@shopify/polaris';
 import DesktopPosition from '@assets/components/DesktopPosition';
-import PropTypes from 'prop-types';
+import {ShoppingSettingsContext} from '@assets/Context/ShopSettingConext';
 
-const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
+const DisplayTabContent = ({}) => {
+  const {settings, handleInputChange, loading = false} = useContext(ShoppingSettingsContext);
   const {
     position,
     displayDuration,
@@ -105,9 +106,3 @@ const DisplayTabContent = ({settings, handleInputChange, loading = false}) => {
   );
 };
 export default DisplayTabContent;
-
-DisplayTabContent.propTypes = {
-  settings: PropTypes.array,
-  handleInputChange: PropTypes.func,
-  loading: PropTypes.bool
-};

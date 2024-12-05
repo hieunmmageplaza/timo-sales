@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {BlockStack, Select, TextField} from '@shopify/polaris';
+import {ShoppingSettingsContext} from '@assets/Context/ShopSettingConext';
 
-const TriggerTabContent = ({settings, handleInputChange}) => {
+const TriggerTabContent = ({}) => {
+  const {settings, handleInputChange} = useContext(ShoppingSettingsContext);
   const options = [
     {label: 'All pages', value: 'all'},
     {label: 'Specific pages', value: 'specific'}
