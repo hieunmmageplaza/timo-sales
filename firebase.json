@@ -58,6 +58,14 @@
       {
         "source": "**",
         "destination": "/standalone.html"
+      },
+      {
+        "source": "/webhook/**",
+        "function": "webhook"
+      },
+      {
+        "source": "/clientApi/**",
+        "function": "clientApi"
       }
     ],
     "headers": [

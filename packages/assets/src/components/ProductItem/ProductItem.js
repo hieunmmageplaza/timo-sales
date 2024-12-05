@@ -1,8 +1,7 @@
-import {BlockStack, Icon, InlineStack, Link, ResourceItem, Text, Thumbnail} from '@shopify/polaris';
+import React from 'react';
 import PropTypes from 'prop-types';
+import {BlockStack, Icon, InlineStack, Link, ResourceItem, Text, Thumbnail} from '@shopify/polaris';
 import {CheckSmallIcon} from '@shopify/polaris-icons';
-import React, {memo} from 'react';
-
 import {formatDate} from '../../helpers/utils/formatFullTime';
 
 const ProductItem = ({
@@ -47,4 +46,4 @@ ProductItem.propTypes = {
 };
 ProductItem.displayName = 'ProductItem';
 
-export default memo(ProductItem);
+export default ProductItem;

@@ -7,5 +7,6 @@ const Shopify = require('shopify-api-node');
     apiVersion: '2024-10'
   });
 
+  await shopify.webhook.list();
   console.log('🎅🎅🎅okk');
 })();

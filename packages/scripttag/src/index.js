@@ -1,17 +1,13 @@
 import React from 'preact/compat';
 import {createRoot} from 'react-dom/client';
-import NotificationPopup from '../../assets/src/components/NotificationPopup/NotificationPopup';
+import NotificationPopup from './components/NotificationPopup/NotificationPopup';
+import makeRequest from './helper/api/makeRequest';
 
 (async () => {
   console.log(`%c Timo-sales-pop `, 'background: red; color: white');
-  async function getData() {
-    const response = await fetch(
-      'http://localhost:5050/clientApi/shop?domain=hieutimonew.myshopify.com'
-    );
-    return await response.json();
-  }
-
-  // const result = await getData();
+  // const result = await makeRequest(
+  //   'http://localhost:5050/clientApi/shop?domain=hieutimonew.myshopify.com'
+  // );
   const setting = window?.TIMO;
   const {firstDelay, popsInterval, displayDuration} = setting;
   const notifications = [

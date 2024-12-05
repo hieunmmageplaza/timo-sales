@@ -1,7 +1,7 @@
 import createErrorHandler from '@functions/middleware/errorHandler';
 import webhookRouter from '@functions/routes/webhook';
 import App from 'koa';
-import * as errorService from '@functions/services/errorService';
+import * as errorService from '../services/errorService';
 
 // Initialize all demand configuration for an application
 const webhook = new App();
