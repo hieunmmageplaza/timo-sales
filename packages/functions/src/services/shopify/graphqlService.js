@@ -2,7 +2,7 @@
  * @param shopify
  * @returns {Promise<Object[]>}
  */
-export async function handleGetOrdersGraphQL({shopify}) {
+export async function handleGetOrdersGraphQL({shopify, shopId}) {
   const query = `{
     orders(first: 30) {
       edges {
@@ -32,7 +32,16 @@ export async function handleGetOrdersGraphQL({shopify}) {
     return orders.edges.map(({node: {id, createdAt, shippingAddress, lineItems}}) => {
       const imageUrl = lineItems.nodes?.[0]?.image?.url || null;
       const {firstName, lastName, city, country} = shippingAddress;
-      return {orderId: id, createdAt, firstName, lastName, city, country, productImage: imageUrl};
+      return {
+        orderId: id,
+        createdAt,
+        firstName,
+        lastName,
+        city,
+        country,
+        productImage: imageUrl,
+        shopId
+      };
     });
   } catch (error) {
     console.error('Error fetching orders:', error);

@@ -15,7 +15,7 @@ export async function installApp(ctx) {
   console.log('================Start_install_app================');
   try {
     const {shopify, shopData} = await getShopifyShop(ctx);
-    const notifications = await handleGetOrdersGraphQL({shopify});
+    const notifications = await handleGetOrdersGraphQL({shopify, shopId: shopData.id});
     await Promise.all([
       initShopSettings(shopData.id),
       initShopNotifications(notifications),
