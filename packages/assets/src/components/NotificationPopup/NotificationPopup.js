@@ -6,20 +6,26 @@ const NotificationPopup = ({
   setting = {},
   notificationData = {
     firstName: 'John Doe',
+    lastName: '',
     city: 'New York',
     country: 'United States',
     productName: 'Puffer Jacket With Hidden Hood',
-    timestamp: '1 day ago',
+    timeAgo: '1 day ago',
     productImage:
       'https://plus.unsplash.com/premium_photo-1682125177822-63c27a3830ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2hvZXN8ZW58MHx8MHx8fDA%3D'
-  }
+  },
+  isStoreFront = false
 }) => {
-  const {firstName, city, country, productName, timestamp, productImage} = notificationData;
+  const {firstName, city, country, productName, timeAgo, productImage} = notificationData;
   const {position, hideTimeAgo} = setting;
-  console.log('🎅🎅🎅render');
+  console.log('===>render NotificationPopup');
 
   return (
-    <div className={`Avava-SP__Wrapper fadeInUp animated ${position}`}>
+    <div
+      className={`Avava-SP__Wrapper fadeInUp animated ${position} ${
+        isStoreFront ? '_storeFront' : '_admin'
+      }`}
+    >
       <div className="Avava-SP__Inner">
         <div className="Avava-SP__Container">
           <a href="#" className={'Avava-SP__LinkWrapper'}>
@@ -35,7 +41,7 @@ const NotificationPopup = ({
               </div>
               <div className={'Avada-SP__Subtitle'}>purchased {productName}</div>
               <div className={'Avada-SP__Footer'}>
-                {!hideTimeAgo && timestamp}
+                {!hideTimeAgo && timeAgo}
                 <span className="uni-blue">
                   <i className="fa fa-check" aria-hidden="true" /> by Avada
                 </span>
@@ -50,7 +56,8 @@ const NotificationPopup = ({
 
 NotificationPopup.propTypes = {
   setting: PropTypes.object,
-  notificationData: PropTypes.object
+  notificationData: PropTypes.object,
+  isStoreFront: PropTypes.bool
 };
 
 export default NotificationPopup;

@@ -1,13 +1,31 @@
-import React from 'preact/compat';
-import {createRoot} from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import NotificationPopup from '../../assets/src/components/NotificationPopup/NotificationPopup';
 import makeRequest from './helper/api/makeRequest';
 
 (async () => {
-  console.log(`%c Timo-sales-pop `, 'background: red; color: white');
+  console.log(`%c Timo-sales-pop 123 `, 'background: red; color: white');
+  const shopDomain = window.location.hostname;
+  console.log('🎅🎅🎅', shopDomain);
+
+  async function getData() {
+    const response = await fetch(`http://localhost:5050/clientApi/shop?domain=${shopDomain}`, {
+      mode: 'no-cors'
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    console.log('🎅🎅🎅response', response);
+
+    return await response.json();
+  }
+
   // const result = await makeRequest(
-  //   'http://localhost:5050/clientApi/shop?domain=hieutimonew.myshopify.com'
+  //   `http://localhost:5050/clientApi/shop?domain=${shopDomain}`
   // );
+
+  // const result = await getData();
+
   const setting = window?.TIMO;
   const {firstDelay, popsInterval, displayDuration} = setting;
   const notifications = [
@@ -16,22 +34,22 @@ import makeRequest from './helper/api/makeRequest';
       city: 'Hanoi',
       country: 'Vietnam',
       shopId: 'N91TObN0j4mYDbSG3CFi',
-      timeStamp: new Date(),
+      timeAgo: '1 day ago',
       productName: 'Iphone16',
       productId: '1',
       productImage:
-        'https://hieutimonew.myshopify.com/cdn/shop/files/Main_0a4e9096-021a-4c1e-8750-24b233166a12.jpg?v=1733042401&width=990'
+        'https://cdn.shopify.com/s/files/1/0676/3534/7631/files/snowboard_sky.png?v=1733042402'
     },
     {
       firstName: 'Hieu',
       city: 'HCM',
       country: 'Vietnam',
       shopId: 'N91TObN0j4mYDbSG3CFi',
-      timeStamp: new Date(),
+      timeAgo: '10 day ago',
       productName: 'Iphone17',
       productId: '2',
       productImage:
-        'https://hieutimonew.myshopify.com/cdn/shop/files/Main_0a4e9096-021a-4c1e-8750-24b233166a12.jpg?v=1733042401&width=990'
+        'https://cdn.shopify.com/s/files/1/0676/3534/7631/files/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg?v=1733042402'
     }
   ];
 
@@ -47,9 +65,10 @@ import makeRequest from './helper/api/makeRequest';
       container.id = 'avada-sales-pop';
 
       document.body.appendChild(container);
-      const root = createRoot(container);
-      root.render(<NotificationPopup setting={setting} notificationData={notifications[i]} />);
-      console.log('==>render done');
+      const root = ReactDOM.createRoot(container);
+      root.render(
+        <NotificationPopup setting={setting} notificationData={notifications[i]} isStoreFront />
+      );
       await delay(displayDuration);
       document.body.removeChild(container);
     }

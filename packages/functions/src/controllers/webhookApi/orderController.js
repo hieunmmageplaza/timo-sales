@@ -11,6 +11,7 @@ import {createNewNotification} from '@functions/repositories/notificationsReposi
  */
 export async function createNotification(ctx) {
   try {
+    console.log('🎅🎅🎅 createNotification function');
     const domain = await ctx.get('X-Shopify-Shop-Domain');
     const orderData = ctx.req.body;
     console.log('===> createNotification function');

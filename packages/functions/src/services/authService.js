@@ -7,11 +7,15 @@ import {getShopByField} from '@functions/repositories/shopRepository';
  * @returns {Promise<void>}
  */
 export async function afterLogin(ctx) {
-  const shopifyDomain = ctx.state.shopify.shop;
+  console.log('===>afterLogin function');
+  // const shopifyDomain = ctx.state.shopify.shop;
+  const shopifyDomain = 'hieutimonew.myshopify.com';
   const shopData = await getShopByField(shopifyDomain);
+  console.log('test afterLogin');
   if (appConfig.baseUrl.includes('trycloudflare')) {
     const shopify = initShopify(shopData);
     await registerWebhook(shopify);
+    console.log('🎅🎅🎅', await shopify.webhook.list());
   }
 }
 
@@ -31,6 +35,7 @@ async function registerWebhook(shopify) {
     }
     const existingWebhook = currentWebhooks.find(webhook => webhook.address === webhookAddress);
     if (!existingWebhook) {
+      console.log('==> create webhook orders/create');
       return await shopify.webhook.create({
         address: webhookAddress,
         topic: 'orders/create',
