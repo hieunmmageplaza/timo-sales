@@ -33,9 +33,8 @@ export async function getNotifications(ctx) {
  */
 export const getDataClient = async ctx => {
   try {
-    console.log('🎅🎅🎅test getDataClient ');
-    const {shopifyDomain} = ctx.request.query;
-    const shopData = await getShopByField(shopifyDomain);
+    const {domain} = ctx.request.query;
+    const shopData = await getShopByField(domain);
 
     const notification = await getNotificationsByShopId(shopData.id);
     if (!notification) {
@@ -44,9 +43,7 @@ export const getDataClient = async ctx => {
 
     ctx.body = {
       success: true,
-      data: {
-        notification
-      }
+      data: notification
     };
   } catch (error) {
     console.log('Error', error.message);

@@ -16,9 +16,16 @@ const NotificationPopup = ({
   },
   isStoreFront = false
 }) => {
-  const {firstName, city, country, productName, timeAgo, productImage} = notificationData;
+  const {
+    firstName = '',
+    lastName = '',
+    city,
+    country,
+    productName,
+    timeAgo,
+    productImage
+  } = notificationData;
   const {position, hideTimeAgo} = setting;
-  console.log('===>render NotificationPopup');
 
   return (
     <div
@@ -37,7 +44,7 @@ const NotificationPopup = ({
             ></div>
             <div className="Avada-SP__Content">
               <div className={'Avada-SP__Title'}>
-                {firstName} in {city}, {country}
+                {firstName} {lastName} in {city}, {country}
               </div>
               <div className={'Avada-SP__Subtitle'}>purchased {productName}</div>
               <div className={'Avada-SP__Footer'}>

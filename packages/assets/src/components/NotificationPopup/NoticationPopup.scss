@@ -3,9 +3,10 @@
   position: relative;
   z-index: 999999;
   color: #333;
+  max-width: 400px;
 
   &._storeFront {
-    width: 270px;
+    width: 300px;
   }
 
   &.bottom-left {

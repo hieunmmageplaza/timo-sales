@@ -68,9 +68,9 @@ export const deleteShopNotificationByShopId = async shopId => {
 
 /**
  * Creates a new notification when have new order.
- * @param {string} data
+ * @param {{firstName, lastName, country, productImage: *, city, created_at}} data
  * @returns {Promise<FirebaseFirestore.DocumentReference>}
  */
 export async function createNewNotification(data) {
-  await notificationRef.doc().set(data);
+  await notificationRef.add(data);
 }

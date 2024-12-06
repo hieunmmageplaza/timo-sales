@@ -6,7 +6,7 @@ import * as errorService from '@functions/services/errorService';
 const clientApi = new App();
 clientApi.proxy = true;
 
-clientApi.use(cors({origin: 'http://localhost:5050'}));
+clientApi.use(cors());
 const router = clientApiRouter();
 clientApi.use(router.allowedMethods());
 clientApi.use(router.routes());
