@@ -8,8 +8,8 @@ import {getShopByField} from '@functions/repositories/shopRepository';
  */
 export async function afterLogin(ctx) {
   console.log('===>afterLogin function');
-  // const shopifyDomain = ctx.state.shopify.shop;
-  const shopifyDomain = 'hieutimonew.myshopify.com';
+  const shopifyDomain = ctx.state.shopify.shop;
+  // const shopifyDomain = 'hieutimonew.myshopify.com';
   const shopData = await getShopByField(shopifyDomain);
   console.log('test afterLogin');
   if (appConfig.baseUrl.includes('trycloudflare')) {
