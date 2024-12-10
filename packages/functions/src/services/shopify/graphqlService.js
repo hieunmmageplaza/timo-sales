@@ -34,7 +34,7 @@ export async function handleGetOrdersGraphQL({shopify, shopId}) {
       const {firstName, lastName, city, country} = shippingAddress;
       return {
         orderId: id,
-        createdAt,
+        createdAt: new Date(createdAt),
         firstName,
         lastName,
         city,

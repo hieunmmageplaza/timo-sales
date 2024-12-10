@@ -27,10 +27,11 @@ export default class DisplayManager {
     const {firstDelay = 1, popsInterval = 3, displayDuration = 5} = this.settings;
     if (!this.notifications || this.notifications.length === 0) return;
 
-    for (let i = 0; i < this.notifications.length; i++) {
-      const notification = this.notifications[i];
+    let isFirstNotification = true;
 
-      await this.delay(i === 0 ? firstDelay : popsInterval);
+    for (const notification of this.notifications) {
+      await this.delay(isFirstNotification ? firstDelay : popsInterval);
+      isFirstNotification = false;
 
       this.root.render(
         <NotificationPopup

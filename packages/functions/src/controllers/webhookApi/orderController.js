@@ -12,7 +12,7 @@ import {createNewNotification} from '@functions/repositories/notificationsReposi
 export async function createNotification(ctx) {
   try {
     console.log('===> createNotification function');
-    const domain = await ctx.get('X-Shopify-Shop-Domain');
+    const domain = ctx.get('X-Shopify-Shop-Domain');
     const orderData = ctx.req.body;
     const shopData = await getShopByField(domain);
     const shopify = initShopify(shopData);
@@ -25,7 +25,7 @@ export async function createNotification(ctx) {
       lastName: last_name,
       city,
       country,
-      created_at,
+      createdAt: new Date(created_at),
       productImage: imageUrl,
       shopId: shopData.id
     };

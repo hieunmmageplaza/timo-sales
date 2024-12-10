@@ -55,6 +55,10 @@ export default function useFetchApi({
     }
   }
 
+  const handleInputChange = (value, key) => {
+    setData(prev => ({...prev, [key]: value}));
+  };
+
   useEffect(() => {
     if (initLoad && !fetched) {
       fetchApi(url, initQueries).then(() => {});
@@ -70,6 +74,7 @@ export default function useFetchApi({
     setCount,
     loading,
     fetched,
-    setFetched
+    setFetched,
+    handleInputChange
   };
 }
