@@ -29,7 +29,7 @@ const NotificationPopup = ({
   const {position, hideTimeAgo} = setting;
   return (
     <div
-      className={`Avava-SP__Wrapper fadeInUp animated ${position ? position : ''} ${
+      className={`Avava-SP__Wrapper fadeInUp animated ${position && isStoreFront ? position : ''} ${
         isStoreFront ? '_storeFront' : '_admin'
       }`}
     >

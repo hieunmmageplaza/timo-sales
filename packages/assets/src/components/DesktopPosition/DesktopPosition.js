@@ -1,6 +1,6 @@
 import React from 'react';
 import {DEFAULT_DESKTOP_POSITION} from '@assets/const/Notification';
-import {BlockStack, InlineStack} from '@shopify/polaris';
+import {BlockStack, InlineStack, Text} from '@shopify/polaris';
 
 import './style.scss';
 import {Skela} from 'react-skela';
@@ -14,7 +14,7 @@ export default function DesktopPosition({
 }) {
   return (
     <BlockStack>
-      <p>Desktop position</p>
+      <Text as={'p'}>Desktop position</Text>
       <InlineStack gap="400">
         {options.map((option, index) =>
           loading ? (
@@ -34,7 +34,7 @@ export default function DesktopPosition({
           )
         )}
       </InlineStack>
-      <p>The display position of the pop on your website</p>
+      <Text as={'p'}>The display position of the pop on your website</Text>
     </BlockStack>
   );
 }
