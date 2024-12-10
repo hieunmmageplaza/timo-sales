@@ -1,9 +1,10 @@
 import React from 'react';
 import './NoticationPopup.scss';
 import PropTypes from 'prop-types';
+import {DEFAULT_SETTINGS_CONFIG} from '../../const/Notification';
 
 const NotificationPopup = ({
-  setting = {},
+  setting = DEFAULT_SETTINGS_CONFIG,
   notificationData = {
     firstName: 'John Doe',
     lastName: '',
@@ -26,10 +27,9 @@ const NotificationPopup = ({
     productImage
   } = notificationData;
   const {position, hideTimeAgo} = setting;
-
   return (
     <div
-      className={`Avava-SP__Wrapper fadeInUp animated ${position} ${
+      className={`Avava-SP__Wrapper fadeInUp animated ${position ? position : ''} ${
         isStoreFront ? '_storeFront' : '_admin'
       }`}
     >
